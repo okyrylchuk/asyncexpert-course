@@ -33,7 +33,17 @@ namespace Dotnetos.AsyncExpert.Homework.Module01.Benchmark
         [ArgumentsSource(nameof(Data))]
         public ulong Iterative(ulong n)
         {
-            return 0;
+            if (n == 1 || n == 2) return 1;
+
+            ulong a = 1, b = 1;
+            for (ulong i = 2; i < n; ++i)
+            {
+                var c = a + b;
+                a = b;
+                b = c;
+            }
+
+            return b;
         }
 
         public IEnumerable<ulong> Data()
