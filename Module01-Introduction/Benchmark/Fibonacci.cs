@@ -3,6 +3,7 @@ using BenchmarkDotNet.Attributes;
 
 namespace Dotnetos.AsyncExpert.Homework.Module01.Benchmark
 {
+    [MemoryDiagnoser]
     [DisassemblyDiagnoser(exportCombinedDisassemblyReport: true)]
     public class FibonacciCalc
     {
