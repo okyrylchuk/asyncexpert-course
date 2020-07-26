@@ -19,14 +19,25 @@ namespace Dotnetos.AsyncExpert.Homework.Module01.Benchmark
         public ulong Recursive(ulong n)
         {
             if (n == 1 || n == 2) return 1;
-            return Recursive(n - 2) + Recursive(n - 1);
+
+            return Recursive(n - 1) + Recursive(n - 2);
         }
 
         [Benchmark]
         [ArgumentsSource(nameof(Data))]
         public ulong RecursiveWithMemoization(ulong n)
         {
-            return 0;
+            return RecursiveWithMemoization(n, new ulong[n + 1]);
+        }
+
+        private ulong RecursiveWithMemoization(ulong n, ulong[] memo)
+        {
+            if (n == 0 || n == 1) return n;
+
+            if (memo[n] == 0)
+                memo[n] = RecursiveWithMemoization(n - 1, memo) + RecursiveWithMemoization(n - 2, memo);
+
+            return memo[n];
         }
         
         [Benchmark]
